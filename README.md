@@ -17,13 +17,13 @@ efficient.
 ● CaretEnsemble
 
 ## Data Cleaning
-* Missing Data
+1. Missing Data
 There are some missing data for Item weight and Item visibility in the mart. Missing data imputation methodology can be performed for those sets.
 
-* Data Correction
+1. Data Correction
 For the Item Fat Content we realized that there are typos in this section, where it marked “Low Fat” as “LF” and “low fat”; and marked “Regular” as “reg”. In order to solve this problem I found out all the “LF/low fat”and “reg” and replaced them with “Low Fat” and “Regular”. And then I replaced the item fact content for item type “Health and Hygiene,Household, and Others“ with “NA” since they are not food and drink.
 
-* Data Transformation
+1. Data Transformation
 I used the year operation instead of establishment year ( 2013 -Outlet_Establishment_Year) , which can be used as a numeric variable in the model.
 
 ## Outlier
