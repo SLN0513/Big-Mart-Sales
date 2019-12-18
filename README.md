@@ -29,7 +29,15 @@ I used the year operation instead of establishment year ( 2013 -Outlet_Establish
 ## Outlier
 I used histogram and qq plot to check the distribution of the sales data and then found that it was close to exponential distribtuion. 
 By looking at the box whisker plot,  each outlet have few potential outliers. And OUT027 has much higher potential sales outlier data. Also OUT027 has higher average sales compared to other outlets. 
-![Image of histogram](https://github.com/williamcheng200102/Big-Mart-Sales/blob/master/Image/sales_diagram.jpg) ![Image of exponential](https://github.com/williamcheng200102/Big-Mart-Sales/blob/master/Image/exponential%20qq%20plot.jpg)
+
+### histogram for sales data
+![Image of histogram](https://github.com/williamcheng200102/Big-Mart-Sales/blob/master/Image/sales_diagram.jpg) 
+
+### exponential distribution qq plot
+
+![Image of exponential](https://github.com/williamcheng200102/Big-Mart-Sales/blob/master/Image/exponential%20qq%20plot.jpg)
+
+### Box Whisker for outliers group by outlet
 ![Image of boxplot](https://github.com/williamcheng200102/Big-Mart-Sales/blob/master/Image/boxplot.jpg)
 
 And I used getOutlier in R to test the outliers which give use the results saying there is no outlier. So we don’t need to remove any outliers here according to getOutliers tool.
@@ -118,7 +126,7 @@ In the outlier detection section, I used qq plot to distinguish the distribution
 Also, in the variable selection, we can figure out a way to combine the outlet identifier properly, which may help to reduce the model complexity and increase the model freedom degree.
 
 ## Contact
-williamcheng200102@gmail.com
+If you have any questions, feel free to contact me at williamcheng200102@gmail.com
 
 ## References
 [1]https://datahack.analyticsvidhya.com/contest/practice-problem-big-mart-sales-iii/
