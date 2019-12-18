@@ -28,7 +28,7 @@ I used the year operation instead of establishment year ( 2013 -Outlet_Establish
 
 ## Outlier
 I used histogram and qq plot to check the distribution of the sales data and then found that it was close to exponential distribtuion. 
-
+By looking at the box whisker plot,  each outlet have few potential outliers. And OUT027 has much higher potential sales outlier data. Also OUT027 has higher average sales compared to other outlets. 
 ![Image of histogram](https://github.com/williamcheng200102/Big-Mart-Sales/blob/master/Image/sales_diagram.jpg) ![Image of exponential](https://github.com/williamcheng200102/Big-Mart-Sales/blob/master/Image/exponential%20qq%20plot.jpg)
 ![Image of boxplot](https://github.com/williamcheng200102/Big-Mart-Sales/blob/master/Image/boxplot.jpg)
 
@@ -44,8 +44,7 @@ Below are the results from the getOutlier function performed above.
 
 ## Variable Selection
 I used correaltion matirx to check the correaltion between varialbes and found there are no correlation among variables. Then I used "stepwise" variable selectuon to select variables.
-stepwise variable selection | 
------------- | 
+```
 model1 <- glm(Item_Outlet_Sales~
               Item_Weight
               +Item_Fat_Content
@@ -56,16 +55,62 @@ model1 <- glm(Item_Outlet_Sales~
               +Outlet_Size
               +Outlet_Type
               +Years_of_Operation,
-              data = af_train_data) 
-              v_selection <- stepAIC(model1, direction = "both", trace = FALSE)| 
+              data = af_train_data)
 
+v_selection <- stepAIC(model1, direction = "both", trace = FALSE)
 
-
-
+```
+I selected following variables in the model based on "stepAIC" function: Item MRP, Location Type Tier, Outlet Size, Outlet Type and years of operation are significant. Besides I add combined item type in the model to distinguish the product type.
 
 ## Modeling
+With the selection of the variables with high significance, I built a generalized linear regression model and Lasso regression in the training dataset with 3 fold cross validation.
+```
+control <- trainControl(method = "repeatedcv", number = 10, repeats = 3, savePredictions = TRUE, classProbs = TRUE)
+mList <- c('glm','glmnet')
 
+fit_models <- caretList(Item_Outlet_Sales~
+                        Combined_Item_Type
+                        +Item_MRP
+                        +Outlet_Identifier
+                        +Outlet_Location_Type
+                        +Outlet_Size
+                        +Outlet_Type
+                        +Years_of_Operation,
+                        data = af_train_data,
+                        trControl = control, 
+                        methodList = mList)
+```
+The RMSE(Root Mean Square Error)  for generalized linear regression model is 1128.372. And for the glmnet model we have the optimal value for the lowest RMSE is alpha = 1 and lambda = 1.937. With the optimal value for penalty item, I have the RMSE of model equal to 1128.335 which is slightly lower than generalized linear regression model.
+```
+$glm
+Generalized Linear Model 
+
+  RMSE      Rsquared  MAE     
+  1128.372  0.563201  837.2549
+
+$glmnet
+  alpha  lambda      RMSE      Rsquared   MAE     
+  1.00     1.937018  1128.335  0.5632334  836.8594
+  1.00    19.370175  1131.297  0.5617536  836.6575
+  1.00   193.701751  1252.429  0.4958680  927.8833
+
+RMSE was used to select the optimal model using the smallest 
+```
 ## Prediction
+Based on the generalized linear regression and Lasso regression built above, I used prediction function to predict the sales on test data. And I have the RMSE for glm is 1202.0354, and for the glmnet model, I have RMSE equal to 1202.3587. The fitness of two models are very close. However, Lasso model helps to reduce the model complexity and minimize the error for the quantitative response variables. Also it avoids the overfitting issue. So I would still suggest Lasso as the better prediction model.
 
+```
+glmnet_model <- caretStack(fit_models, methodList = "glmnet", trControl = trainControl(method = "repeatedcv", number = 10, repeats = 3, savePredictions = TRUE))
+glmnet_model
+
+predict_on_test <- predict(glmnet_model, newdata = af_test_data )
+Predict_on_test
+
+glm_model <- caretStack(fit_models, method = "glm", trControl = trainControl(method = "repeatedcv", number = 10, repeats = 3, savePredictions = TRUE))
+glm_model
+
+predict_on_test2 <- predict(glm_model, newdata = af_test_data )
+predict_on_test2
+```
 
 
