@@ -1,4 +1,4 @@
-# Big-Mart-Sales
+# Big-Mart-Sales Prediction based on Linear regression and Lasso regression
 
 People use Lasso regression model to predict data  that will change in the future to make plans for the future. For many shops and supermarkets it is essential for them to see what can be the most factors that will influence the sales rates. 
 
