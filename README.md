@@ -3,17 +3,18 @@ The generalized linear regression is a flexible generalization of ordinary linea
 
 ## Table of Contents
 * [Data Overview](#data_overview)
-* Materials and Methodology
-* Data Cleaning
-* Outlier
-* Variable Selection
-* Modeling
-* Prediction
+* [Materials and Methodology](#mm)
+* [Data Cleaning](#data_cleaning)
+* [Outlier](#outlier)
+* [Variable Selection](#variable_selection)
+* [Modeling](#modeling)
+* [Prediction](#prediction)
+* [Further Discussion](#further_discussion)
 
 ## Data Overview <a name="data_overview"></a>
 The data scientists at BigMart have collected 2013 sales data for 1559 products across 10 stores in different cities. Also, certain attributes of each product and store have been defined. The aim is to build a predictive model and find out the sales of each product at a particular store.
 
-## Materials and Methodology
+## Materials and Methodology <a name="mm"></a>
 For this research project, R is the programming language that has been
 used. In the coding it is data analysis libraries that makes the coding
 efficient.
@@ -25,7 +26,7 @@ efficient.
 * MASS
 * CaretEnsemble
 
-## Data Cleaning
+## Data Cleaning <a name="data_cleaning"></a>
 1. Missing Data:
 There are some missing data for Item weight and Item visibility in the mart. Missing data imputation methodology can be performed for those sets.
 
@@ -35,7 +36,7 @@ For the Item Fat Content we realized that there are typos in this section, where
 1. Data Transformation:
 I used the year operation instead of establishment year ( 2013 -Outlet_Establishment_Year) , which can be used as a numeric variable in the model.
 
-## Outlier
+## Outlier<a name="outlier"></a>
 I used histogram and qq plot to check the distribution of the sales data and then found that it was close to exponential distribtuion. 
 By looking at the box whisker plot,  each outlet have few potential outliers. And OUT027 has much higher potential sales outlier data. Also OUT027 has higher average sales compared to other outlets. 
 
@@ -59,7 +60,7 @@ Below are the results from the getOutlier function performed above.
  Left Right 
     0     0 
 
-## Variable Selection
+## Variable Selection<a name="variable_selection"></a>
 I used correaltion matirx to check the correaltion between varialbes and found there are no correlation among variables. Then I used "stepwise" variable selectuon to select variables.
 ```
 model1 <- glm(Item_Outlet_Sales~
@@ -79,7 +80,7 @@ v_selection <- stepAIC(model1, direction = "both", trace = FALSE)
 ```
 I selected following variables in the model based on "stepAIC" function: Item MRP, Location Type Tier, Outlet Size, Outlet Type and years of operation are significant. Besides I add combined item type in the model to distinguish the product type.
 
-## Modeling
+## Modeling<a name="modeling"></a>
 With the selection of the variables with high significance, I built a generalized linear regression model and Lasso regression in the training dataset with 3 fold cross validation.
 ```
 control <- trainControl(method = "repeatedcv", number = 10, repeats = 3, savePredictions = TRUE, classProbs = TRUE)
@@ -113,7 +114,7 @@ $glmnet
 
 RMSE was used to select the optimal model using the smallest 
 ```
-## Prediction
+## Prediction<a name="prediction"></a>
 Based on the generalized linear regression and Lasso regression built above, I used prediction function to predict the sales on test data. And I have the RMSE for glm is 1202.0354, and for the glmnet model, I have RMSE equal to 1202.3587. The fitness of two models are very close. However, Lasso model helps to reduce the model complexity and minimize the error for the quantitative response variables. Also it avoids the overfitting issue. So I would still suggest Lasso as the better prediction model.
 
 ```
@@ -129,7 +130,7 @@ glm_model
 predict_on_test2 <- predict(glm_model, newdata = af_test_data )
 predict_on_test2
 ```
-## Further Discussion
+## Further Discussion<a name="further_discussion"></a>
 In the outlier detection section, I used qq plot to distinguish the distribution of the sales data. It's close to exponential distribution. But it has some skewness  and bias, which may influence the accuracy of getOutliers function. In this case, There are some improvements can be made to the outlier detection part. 
 
 Also, in the variable selection, we can figure out a way to combine the outlet identifier properly, which may help to reduce the model complexity and increase the model freedom degree.
