@@ -63,7 +63,7 @@ Below are the results from the getOutlier function performed above.
 ## Variable Selection<a name="variable_selection"></a>
 I used correaltion matirx to check the correaltion between varialbes and found there are no positive or negative correlation among variables. Then I used "stepwise" variable selectuon to select variables.
 
-###correlation matrix
+### correlation matrix
 ![Image of corr](https://github.com/williamcheng200102/Big-Mart-Sales/blob/master/Image/correlation.jpg)
 
 ```
