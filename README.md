@@ -2,7 +2,7 @@
 The generalized linear regression is a flexible generalization of ordinary linear regression that allows for response variables that have error distribution models other than a normal distribution. Lasso regression which is the generalized linear regression via penalized maximum likelihood can avoid the overfitting issue and help in selecting variables. Lasso regression uses shrinkage, where data values are shrunk towards a central point. This project will demonstrate how generalized linear regression and generalized Lasso regression perform in big mart sales prediction.
 
 ## Data Overview
-The data scientists at BigMart have collected 2013 sales data for 1559 products across 10 stores in different cities. Also, certain attributes of each product and store have been defined. The aim is to build a predictive model and find out the sales of each product at a particular store.[1] Below are the variables and its corresponding descriptions. We will use the variable name in the following paper.
+The data scientists at BigMart have collected 2013 sales data for 1559 products across 10 stores in different cities. Also, certain attributes of each product and store have been defined. The aim is to build a predictive model and find out the sales of each product at a particular store.
 
 ## Materials and Methodology
 For this research project, R is the programming language that has been
@@ -42,8 +42,26 @@ Below are the results from the getOutlier function performed above.
  Left Right 
     0     0 
 
-
 ## Variable Selection
+I used correaltion matirx to check the correaltion between varialbes and found there are no correlation among variables. Then I used "stepwise" variable selectuon to select variables.
+stepwise variable selection | 
+------------ | 
+model1 <- glm(Item_Outlet_Sales~
+              Item_Weight
+              +Item_Fat_Content
+              +Item_Visibility
+              +Combined_Item_Type
+              +Item_MRP
+              +Outlet_Location_Type
+              +Outlet_Size
+              +Outlet_Type
+              +Years_of_Operation,
+              data = af_train_data) 
+              v_selection <- stepAIC(model1, direction = "both", trace = FALSE)| 
+
+
+
+
 
 ## Modeling
 
