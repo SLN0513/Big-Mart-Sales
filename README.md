@@ -112,5 +112,17 @@ glm_model
 predict_on_test2 <- predict(glm_model, newdata = af_test_data )
 predict_on_test2
 ```
+## Further Discussion
+In the outlier detection section, I used qq plot to distinguish the distribution of the sales data. It's close to exponential distribution. But it has some skewness  and bias, which may influence the accuracy of getOutliers function. In this case, There are some improvements can be made to the outlier detection part. 
 
+Also, in the variable selection, we can figure out a way to combine the outlet identifier properly, which may help to reduce the model complexity and increase the model freedom degree.
+
+## Contact
+williamcheng200102@gmail.com
+
+## References
+[1]https://datahack.analyticsvidhya.com/contest/practice-problem-big-mart-sales-iii/
+[2]https://www.statisticshowto.datasciencecentral.com/lasso-regression/
+[3]http://statmath.wu.ac.at/courses/heather_turner/glmCourse_001.pdf
+[4]https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51
 
