@@ -61,7 +61,11 @@ Below are the results from the getOutlier function performed above.
     0     0 
 
 ## Variable Selection<a name="variable_selection"></a>
-I used correaltion matirx to check the correaltion between varialbes and found there are no correlation among variables. Then I used "stepwise" variable selectuon to select variables.
+I used correaltion matirx to check the correaltion between varialbes and found there are no positive or negative correlation among variables. Then I used "stepwise" variable selectuon to select variables.
+
+###correlation matrix
+![Image of corr](https://github.com/williamcheng200102/Big-Mart-Sales/blob/master/Image/correlation.jpg)
+
 ```
 model1 <- glm(Item_Outlet_Sales~
               Item_Weight
