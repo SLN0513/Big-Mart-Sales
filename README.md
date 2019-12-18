@@ -8,27 +8,40 @@ The data scientists at BigMart have collected 2013 sales data for 1559 products 
 For this research project, R is the programming language that has been
 used. In the coding it is data analysis libraries that makes the coding
 efficient.
-● Outliers
-● Stats
-● Caret
-● Extremevalues
-● Corrplot
-● MASS
-● CaretEnsemble
+* Outliers
+* Stats
+* Caret
+* Extremevalues
+* Corrplot
+* MASS
+* CaretEnsemble
 
 ## Data Cleaning
-1. Missing Data
+1. Missing Data:
 There are some missing data for Item weight and Item visibility in the mart. Missing data imputation methodology can be performed for those sets.
 
-1. Data Correction
+1. Data Correction:
 For the Item Fat Content we realized that there are typos in this section, where it marked “Low Fat” as “LF” and “low fat”; and marked “Regular” as “reg”. In order to solve this problem I found out all the “LF/low fat”and “reg” and replaced them with “Low Fat” and “Regular”. And then I replaced the item fact content for item type “Health and Hygiene,Household, and Others“ with “NA” since they are not food and drink.
 
-1. Data Transformation
+1. Data Transformation:
 I used the year operation instead of establishment year ( 2013 -Outlet_Establishment_Year) , which can be used as a numeric variable in the model.
 
 ## Outlier
-I used histogram and qq plot to check the distribution of the sales data and then found that it was close to exponential distribtuion. So I used GetOutlier function in R to check the outliers. 
-![Image of exponential](https://github.com/williamcheng200102/Big-Mart-Sales/blob/master/Image/exponential%20qq%20plot.jpg)
+I used histogram and qq plot to check the distribution of the sales data and then found that it was close to exponential distribtuion. 
+
+![Image of histogram](https://github.com/williamcheng200102/Big-Mart-Sales/blob/master/Image/sales_diagram.jpg) ![Image of exponential](https://github.com/williamcheng200102/Big-Mart-Sales/blob/master/Image/exponential%20qq%20plot.jpg)
+![Image of boxplot](https://github.com/williamcheng200102/Big-Mart-Sales/blob/master/Image/boxplot.jpg)
+
+And I used getOutlier in R to test the outliers which give use the results saying there is no outlier. So we don’t need to remove any outliers here according to getOutliers tool.
+
+**getOutliers(af_train_data$Item_Outlet_Sales, distribution = 'exponential')**
+
+Below are the results from the getOutlier function performed above. 
+
+**getOutliers:**
+ Left Right 
+    0     0 
+
 
 ## Variable Selection
 
