@@ -2,7 +2,7 @@
 The generalized linear regression is a flexible generalization of ordinary linear regression that allows for response variables that have error distribution models other than a normal distribution. Lasso regression which is the generalized linear regression via penalized maximum likelihood can avoid the overfitting issue and help in selecting variables. Lasso regression uses shrinkage, where data values are shrunk towards a central point. This project will demonstrate how generalized linear regression and generalized Lasso regression perform in big mart sales prediction.
 
 ## Table of Contents
-* [Data Overview](## Data Overview)
+* [Data Overview](#data_overview)
 * Materials and Methodology
 * Data Cleaning
 * Outlier
@@ -10,7 +10,7 @@ The generalized linear regression is a flexible generalization of ordinary linea
 * Modeling
 * Prediction
 
-## Data Overview
+## Data Overview <a name="data_overview"></a>
 The data scientists at BigMart have collected 2013 sales data for 1559 products across 10 stores in different cities. Also, certain attributes of each product and store have been defined. The aim is to build a predictive model and find out the sales of each product at a particular store.
 
 ## Materials and Methodology
